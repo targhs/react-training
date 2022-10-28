@@ -1,23 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import { useEffect } from 'react';
+
+
+// https://reactjs.org/docs/hooks-intro.html
+// https://www.npmjs.com/package/axios
+
 
 function App() {
+  const [name, setName] = useState("123")
+
+  useEffect(()=> {
+    console.log("Component rendered")
+
+    return () => {
+      console.log("Unmounted")
+    }
+  }, [])
+
+  useEffect(() => {
+    console.log("Name variable changed to: ", name)
+  }, [name])
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {name}
+      <button onClick={()=>{
+        setName("345")
+      }}>Rename</button>
     </div>
   );
 }
